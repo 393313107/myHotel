@@ -6,7 +6,33 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+//链接数据库！！！
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  port: '3306',
+  database: 'test1'//上文说的名字
+});
+connection.connect(); //启动连接！！！！
+//这中间的是操作！！↓（增删查改，随你开心！！！）
+// 需要学数据库的代码
 
+var addSql = 'INSERT INTO demo(Id,name,url,alexa,country) VALUES(3,?,?,?,?)';
+var addSqlParams = ['中文', 'https://c.xxrunoob.com', '45643', 'CN','sasad']; //这是想增加的数据
+//增
+connection.query(addSql, addSqlParams, function (err, res) { //询问访问数据库，也就是去嫩那个数据库
+  if (err) { //失败就报个错
+    console.log('[INSERT ERROR] - ', err.message);
+    return;
+  }
+  console.log("数据库增的结果：");
+  console.log(res);
+});
+
+//这中间的是操作！！↑
+connection.end(); //结束连接！！！不能一直连着！！
 var app = express();
 
 // view engine setup
