@@ -19,10 +19,15 @@ connection.connect(); //启动连接！！！！
 //这中间的是操作！！↓（增删查改，随你开心！！！）
 // 需要学数据库的代码
 
-var addSql = 'INSERT INTO demo(Id,name,url,alexa,country) VALUES(3,?,?,?,?)';
-var addSqlParams = ['中文', 'https://c.xxrunoob.com', '45643', 'CN','sasad']; //这是想增加的数据
+var addSql = 'INSERT INTO demo(Id,name,url,age,country,alexa) VALUES(3,?,?,?,?,?)';
+var readSql = 'SELECT * FROM demo WHERE id = 3 and name = 123'
+let modSql = "update demo set name = ?, url = ? where id like ?";
+var addSqlParams = ['中文', 'https://c.xxrunoob.com', '45643222', 'CN', '15']; //这是想增加的数据
+var addsSql = 'INSERT INTO demo(id,name) VALUE ?'
+
+
 //增
-connection.query(addSql, addSqlParams, function (err, res) { //询问访问数据库，也就是去嫩那个数据库
+connection.query(readSql, function (err, res) { //询问访问数据库，也就是去嫩那个数据库
   if (err) { //失败就报个错
     console.log('[INSERT ERROR] - ', err.message);
     return;
@@ -49,12 +54,12 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
