@@ -1,15 +1,24 @@
 <template>
   <div>
-    <div class="heard">{{title}}</div>
+    <div class="heard">{{val}}</div>
   </div>
 </template>
 
 <script>
+import bus from '@/common/bus.js'
 export default {
   name: 'heard',
   props: ['title'],
   data () {
-    return {}
+    return {
+      val: this.title
+    }
+  },
+  mounted: function () {
+    bus.$on('talk', (e) => {
+      this.val = e
+      this.$emit('update:title', this.title)
+    })
   }
 }
 </script>

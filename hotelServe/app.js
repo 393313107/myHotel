@@ -13,11 +13,9 @@ var connection = mysql.createConnection({
   user: 'root',
   password: '',
   port: '3306',
-  database: 'test1'//上文说的名字
+  database: 'test1'
 });
-connection.connect(); //启动连接！！！！
-//这中间的是操作！！↓（增删查改，随你开心！！！）
-// 需要学数据库的代码
+connection.connect(); 
 
 var addSql = 'INSERT INTO demo(Id,name,url,age,country,alexa) VALUES(3,?,?,?,?,?)';
 var readSql = 'SELECT * FROM demo WHERE id = 3 and name = 123'
@@ -36,7 +34,7 @@ connection.query(readSql, function (err, res) { //询问访问数据库，也就
   console.log(res);
 });
 
-//这中间的是操作！！↑
+
 connection.end(); //结束连接！！！不能一直连着！！
 var app = express();
 

@@ -1,6 +1,6 @@
 <template>
   <div class="body">
-    <heard title='首页'></heard>
+    <heard :title='title'></heard>
     <my-menu class="menu"></my-menu>
     <my-content class="content"></my-content>
   </div>
@@ -13,7 +13,9 @@ import myContent from '@/components/content'
 export default {
   name: 'layout',
   data () {
-    return {}
+    return {
+      title: '首页'
+    }
   },
   components: {
     heard, myMenu, myContent
